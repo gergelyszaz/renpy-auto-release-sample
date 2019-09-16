@@ -12,7 +12,7 @@ jobs:
         entrypoint: /bin/sh
         args: .github/workflows/release/entrypoint.sh
     - name: Upload
-      uses: docker://gergelyszaz/github-action-publish-binaries:alpine
+      uses: docker://gergelyszaz/github-action-publish-binaries:latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
