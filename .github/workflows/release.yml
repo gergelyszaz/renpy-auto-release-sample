@@ -1,0 +1,19 @@
+on: 
+  release:
+    types: [published]
+jobs:
+  build:    
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      uses: docker://gergelyszaz/renpy:7.3.2
+      with:
+        entrypoint: /bin/sh
+        args: .github/workflows/release/entrypoint.sh
+    - name: Upload
+      uses: docker://gergelyszaz/github-action-publish-binaries:alpine
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        args: 'dist/*'
